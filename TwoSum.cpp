@@ -39,9 +39,6 @@ void QuickSort(vector<int> &nums, int start, int end)
 	}
 }
 
-
-
-
 vector<int> twosum(vector<int>& nums, int target)
 {
 	vector<int> result;
@@ -66,7 +63,6 @@ vector<int> twosum(vector<int>& nums, int target)
 				break;
 			}
 		}
-		
 	}
 	return result;
 }
@@ -88,14 +84,11 @@ vector<int> twosum2(vector<int>& nums, int target)
 
 	int index1 = 0;
 	int index2 = 0;
-	//pair<multimap<int, int>::iterator, multimap<int, int>::iterator> ret;
-	
 
 	multimap<int, int>::iterator iter;
 	multimap<int, int>::iterator find_iter;
 	for (iter = nums_map.begin(); iter != nums_map.end(); iter++)
 	{
-		//ret = nums_map.equal_range(iter->first);
 		int tmp = target - iter->first;
 		if ((find_iter=nums_map.find(tmp))==nums_map.end())
 		{
@@ -103,7 +96,6 @@ vector<int> twosum2(vector<int>& nums, int target)
 		}
 		else
 		{
-			//result.push_back(iter->second);
 			index1 = iter->second;
 			if ((iter->first == target) || ((2 * iter->first) == target))
 			{
@@ -113,8 +105,6 @@ vector<int> twosum2(vector<int>& nums, int target)
 					continue;
 				}
 			}
-
-			//result.push_back(find_iter->second);
 			index2 = find_iter->second;
 			break;
 		}
@@ -145,7 +135,6 @@ vector<int> twosum3(vector<int>& nums, int target)
 	map<int, int> nums_maps;
 	for (int i = 0; i < nums.size(); i++)
 	{
-		//nums_maps.insert(pair<int,int> (nums[i], i+1));
 		nums_maps[nums[i]] = i + 1;
 	}
 	map<int, int>::iterator iter;
@@ -157,7 +146,6 @@ vector<int> twosum3(vector<int>& nums, int target)
 		{
 			result.push_back(i+1);
 			result.push_back(iter->second);
-			//result.push_back(nums_maps[remain]);
 			break;
 		}
 	}
