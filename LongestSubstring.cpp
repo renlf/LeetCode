@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -157,33 +158,116 @@ int lengthOfLongestSubstring4(string s)
     {
         if((iter = repeat.find(s[i])) == repeat.end())
         {
-            repeat[s[i]] = i;
-            int tmp_repeat = i - start_index + 1;
-            if(max_repeat < tmp_repeat)
-            {
-                max_repeat = tmp_repeat;
-            }
+            repeat[s[i]] = i;        
+			max_repeat = max(max_repeat, (int)repeat.size());
         }
         else
         {
-            char double_char = iter->first;
             int double_index = iter->second;
             for(int j = start_index; j < double_index; j++)
             {
                 repeat.erase(repeat.find(s[j]));
             }
-            start_index = double_index + 1;
+            
             repeat[s[double_index]] = i;
+			start_index = double_index + 1;
         }
     }
     return max_repeat;
 }
 
+int lengthOfLongestSubstring5(string s) {
+    int str_len = s.length();
+    if(str_len == 0)
+    {
+        return 0;
+    }
+    int count[256];
+    int max_len = 0;
+    int len = 0;
+    memset(count, -1, 256*sizeof(int));
+    for(int i = 0; i < str_len; i++, len++)
+    {
+        if(count[s[i]] >= 0)
+        {
+            i = count[s[i]] + 1;
+            max_len = max(max_len, len);
+            len = 0;
+            memset(count, -1, 256*sizeof(int));
+        }
+        count[s[i]] = i;
+    }
+    return max(max_len,len);
+}
+
+int lengthOfLongestSubstring6(string s)
+{
+    int str_len = s.length();
+    if(str_len == 0)
+    {
+        return 0;
+    }
+    int count[256];
+    memset(count, -1, 256*sizeof(int));
+    int max_len = 0;
+    int l = 0;
+    int r = 0;
+    while((l <= r) && (r < str_len))
+    {
+		while ((r < str_len) && (count[s[r]] == -1))
+        {
+            count[s[r]] = r;
+            r++;
+        }
+
+        max_len = max((r - l), max_len);
+
+        while((r < str_len) && (l <= count[s[r]]))
+        {
+            count[s[l]] = -1;
+            l++;
+        }
+		count[s[r]] = r;
+		r++;
+    }
+    return max_len;
+}
+
+
+int lengthOfLongestSubstring7(string s)
+{
+    int str_len = s.length();
+    if(str_len == 0)
+        return 0;
+    bool array[256];
+    memset(array, false, 256 * sizeof(bool));
+    int max_len = 0;
+    int l = 0;
+    int r = 0;
+    while((l <= r) && (r < str_len))
+    {
+        while((r < str_len) && (array[s[r]] == false))
+        {
+            array[s[r++]] = true;
+        }
+
+        max_len = max(max_len, (r - l));
+
+        while((l < r) && (s[l] != s[r]))
+        {
+            array[s[l++]] = false;
+        }
+        r++;
+		l++;
+    }
+}
+
 int main()
 {
 	//string s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-	string s = "ohomm";
+	string s = "aaaa";
 	int count = lengthOfLongestSubstring4(s);
+	cout << count << endl;
 	int a;
 	cin >> a;
 }
