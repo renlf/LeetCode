@@ -121,6 +121,31 @@ string longestPalindrome2(string s)
     return s.substr(start_index, max_len);
 }
 
+string longestPalindrome3(string s)
+{
+    int str_len = s.length();
+    bool d[str_len][str_len];
+    memset(d, false, str_len * str_len * sizeof(bool));
+    int max_len = 0;
+    int start_index = 0;
+
+    for(int i = 0; i < str_len; i++)
+    {
+        for(int j = 0; j <= i; j++)
+        {
+            d[j][i] = ((s[j] == s[i]) && (i - j < 2 || d[j + 1][i - 1]));
+            if((d[j][i] == true) && (max_len < (i - j + 1)))
+            {
+                max_len = i - j + 1;
+                start_index = j;
+            }
+        }
+        d[i][i] = true;
+    }
+
+    return s.substr(start_index, max_len);
+}
+
 int main()
 {
 	string s = "bppbsooos";
