@@ -25,7 +25,7 @@ int myAtoi(string str)
 	for (int i = index; i < str.length(); i++)
 	{
 		int single = str[i] - '0';
-		if (single < 0 || single > 10)
+		if (single < 0 || single > 9)
 		{
 			return result;
 		}
