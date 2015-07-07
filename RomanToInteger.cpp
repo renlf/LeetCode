@@ -44,6 +44,34 @@ int romanToInt(string s)
 	return result;
 }
 
+int romanToInteger2(string s)
+{
+	int values[7] = { 1000, 500,  100, 50, 10, 5, 1 };
+	string numerals[7] = { "M", "D", "C", "L", "X", "V", "I" };
+	int former = 0;
+	int result = 0;
+	for (int i = 0; i < s.length(); i++)
+	{
+		string sub_str = s.substr(i, 1);
+		int current_val = 0;
+		for (int j = 0; j < 7; j++)
+		{
+			if (sub_str == numerals[j])
+			{
+				current_val = values[j];
+				result += values[j];
+				break;
+			}
+		}
+		if (current_val > former)
+		{
+			result = result - 2 * former;
+		}
+		former = current_val;
+	}
+	return result;
+}
+
 int main()
 {
 	string str = "MDCCCLXXXIV";
