@@ -21,6 +21,43 @@ string intToRoman(int num) {
 	return result;
 }
 
+string intToRoman2(int num)
+{
+	string numerals = "IVXLCDM";
+	string result = "";
+
+	int devided = 1000;
+	int index = 6;
+	while (num)
+	{
+		int dev_result = num / devided;
+		if(dev_result <= 3)
+        {
+            result.append(dev_result, numerals[index]);
+        }
+        else if (dev_result == 4)
+        {
+            result.append(1, numerals[index]);
+            result.append(1, numerals[index + 1]);
+        }
+        else if (dev_result <= 8)
+        {
+            result.append(1, numerals[index + 1]);
+            result.append((dev_result - 5), numerals[index]);
+        }
+        else
+        {
+            result.append(1, numerals[index]);
+            result.append(1, numerals[index + 2]);
+        }
+		num = num % devided;
+		devided /= 10;
+
+        index -= 2;
+	}
+	return result;
+}
+
 int main()
 {
 	string result = intToRoman(4);
