@@ -76,6 +76,44 @@ ListNode* reverseKGroup2(ListNode* head, int k) {
 	return pre;
 }
 
+ListNode *reverseList(ListNode*head, ListNode*last_tail) {
+	ListNode *next_node = head->next;
+	ListNode *res = head;
+	while (next_node) {
+		ListNode *tmp = next_node->next;
+		next_node->next = head;
+		head = next_node;
+		next_node = tmp;
+	}
+	last_tail->next = head;
+	return res;
+}
+
+ListNode *reverseKGroup3(ListNode *head, int k) {
+	ListNode *newHead = new ListNode(0);
+	newHead->next = head;
+
+	int cnt = 0;
+	ListNode *cur_node = head;
+	ListNode *last_tail = newHead;
+	while (cur_node) {
+		cnt++;
+		if (cnt == k) {
+			ListNode *cp = cur_node->next;
+
+			cur_node->next = NULL;
+			last_tail = reverseList(last_tail->next, last_tail);
+			last_tail->next = cp;
+
+			cur_node = cp;
+			cnt = 0;
+			continue;
+		}
+		cur_node = cur_node->next;
+	}
+	return newHead->next;
+}
+
 int main()
 {
 	ListNode* first = new ListNode(0);
