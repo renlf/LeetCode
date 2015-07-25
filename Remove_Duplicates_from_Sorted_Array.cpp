@@ -22,6 +22,26 @@ int removeDuplicates(vector<int>& nums) {
 	return nums.size();
 }
 
+int removeDuplicates2(vector<int>& nums)
+{
+	if (nums.size() == 0)
+		return 0;
+
+	int index = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (nums[i] == nums[index])
+			continue;
+		else
+		{
+			index++;
+			nums[index] = nums[i];
+		}
+	}
+	nums.resize(index + 1);
+	return index + 1;
+}
+
 int main()
 {
 	vector<int> data = {1,1};
