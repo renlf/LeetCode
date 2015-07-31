@@ -9,8 +9,8 @@ int divide(int dividend, int divisor) {
 	if (dividend < 0) sign *= -1;
 	if (divisor < 0)  sign *= -1;
  
-	unsigned int new_dividend = abs(dividend < 0 ? -dividend : dividend);
-	unsigned int new_divisor = abs(divisor < 0 ? -divisor : divisor);
+	unsigned int new_dividend = abs(dividend);
+	unsigned int new_divisor = abs(divisor);
 
 	if (new_dividend < new_divisor)
 		return 0;
@@ -24,7 +24,7 @@ int divide(int dividend, int divisor) {
 	
 	unsigned int result = 0;
 
-	while (new_dividend >= abs(divisor < 0 ? -divisor : divisor))
+	while (new_dividend >= abs(divisor))
 	{
 		while (new_dividend >= new_divisor)
 		{
