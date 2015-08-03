@@ -10,8 +10,6 @@ vector<int> findSubstring(string s, vector<string>& words) {
 	if (s.size() == 0 || words.size() == 0)
 		return result;
 
-	cout << s.size() << " " << words.size() << " " << words[0].length() << endl;
-
 	if (s.size() < (words.size() * words[0].size()))
 		return result;
 
