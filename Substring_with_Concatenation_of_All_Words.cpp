@@ -62,6 +62,49 @@ vector<int> findSubstring(string s, vector<string>& words) {
 	return result;
 }
 
+vector<int> findSubstring2(string s, vector<string>& words) {
+	vector<int> result;
+	if (s.size() == 0 || words.size() == 0)
+		return result;
+
+	if (s.size() < (words.size() * words[0].size()))
+		return result;
+
+	int words_size = words.size();
+	int word_len = words[0].size();
+	int word_total = words_size * word_len;
+	map<string, int> words_count;
+	map<string, int> words_comp;
+	
+	for (int i = 0; i < words_size; i++)
+	{
+		words_comp[words[i]]++;
+	}
+
+	for (int i = 0; i + word_total <= s.size(); i++)
+	{
+		words_count.clear();
+		bool matched = true;
+		for (int j = 0; j < words_size; j++)
+		{
+			string tmp = s.substr(i + j * word_len, word_len);
+			if (words_comp[tmp] > words_count[tmp])
+			{
+				words_count[tmp]++;
+			}
+			else
+			{
+				matched = false;
+				break;
+			}
+		}
+		if (matched)
+			result.push_back(i);
+	}
+
+	return result;
+}
+
 int main()
 {
 	string s = "a";
