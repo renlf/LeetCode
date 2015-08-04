@@ -45,6 +45,49 @@ vector<int> searchRange(vector<int>& nums, int target) {
 	return result;
 }
 
+vector<int> searchRange2(vector<int>& nums, int target)
+{
+	vector<int> result;
+	int left = 0;
+	int right = nums.size() - 1;
+	
+	while (left <= right)
+	{
+		int mid = (left + right) / 2;
+		if (nums[mid] < target)
+		{
+			left = mid + 1;
+			continue;
+		}
+		right = mid - 1;
+	}
+	if (nums[left] != target)
+	{
+		result.push_back(-1);
+		result.push_back(-1);
+		return result;
+	}
+	result.push_back(left);
+
+	right = nums.size() - 1;
+	while (left <= right)
+	{
+		int mid = (left + right) / 2;
+		if (nums[mid] > target)
+		{
+			right = mid - 1;
+			continue;
+		}
+		left = mid + 1;
+	}
+	if (nums[right] != target)
+		result.push_back(result[0]);
+	else
+		result.push_back(right);
+
+	return result;
+}
+
 int main()
 {
 	vector<int> data = { 5, 7, 7, 8, 8, 10 };
