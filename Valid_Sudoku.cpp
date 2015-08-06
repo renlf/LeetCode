@@ -73,7 +73,7 @@ bool isValidSudoku2(vector<vector<char>>& board) {
     {
         for (int j = 0; j < 9; j++)
         {
-			if (!isValid(raw, board, i, j) || !isValid(col, board, j, i) || !isValid(sub, board, 3 * (i / 3) + j / 3, 3 * (i % 3) + j % 3))
+        	if (!isValid(raw, board, i, j) || !isValid(col, board, j, i) || !isValid(sub, board, 3 * (i / 3) + j / 3, 3 * (i % 3) + j % 3))
 				return false;
         }
         raw.clear();
