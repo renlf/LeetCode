@@ -56,7 +56,7 @@ bool isValid(unordered_map<int, bool> &record, vector<vector<char>>& board, int 
 {
 	if (board[i][j] != '.')
 	{
-	    if (record[board[i][j] - '0'])
+		if (record[board[i][j] - '0'])
 			return false;
 		else
 			record[board[i][j] - '0'] = 1;
