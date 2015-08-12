@@ -18,7 +18,6 @@ void combination(vector< vector<int> > &result, vector<int> sub_ret, vector<int>
 	{
 		sub_ret.push_back(candidates[index]);
 		combination(result, sub_ret, candidates, target - candidates[index], index);
-		combination(result, sub_ret, candidates, target - candidates[index], index + 1);
 		sub_ret.pop_back();
 		combination(result, sub_ret, candidates, target, index + 1);
 	}
@@ -29,13 +28,10 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 	vector<int> sub_ret;
 	if (candidates.size() == 0)
 		return result;
-
+	
+	sort(candidates.begin(), candidates.end());
 	combination(result, sub_ret, candidates, target, 0);
-
-	sort(result.begin(), result.end());
-	vector<vector<int>>::iterator iter;
-	iter = unique(result.begin(), result.end());
-	result.resize(distance(result.begin(), iter));
+	
 	return result;
 }
 
