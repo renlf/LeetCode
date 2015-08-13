@@ -15,12 +15,9 @@ bool isMatch(string s, string p) {
 		int pos = 1;
 		while (pos < p.length() && p[pos] == '*')
 			pos++;
-		for (int i = 0; i < s.length(); i++)
-		{
-			if (isMatch(s.substr(i, s.length() - i), p.substr(pos, p.length() - pos)))
-				return true;
-		}
-		return false;
+		if (pos == p.length())
+			return true;
+		return isMatch(s, p.substr(pos, p.length() - pos)) || isMatch(s.substr(1, s.length() - 1), p);
 	}
 	else if (p[0] == '?' || s[0] == p[0])
 	{
