@@ -47,6 +47,32 @@ int trap(vector<int>& height) {
 	return vol;
 }
 
+int trap2(vector<int>& height) {
+	if (height.size() < 2)
+		return 0;
+	vector<int> lmh;
+	int l_max = height[0];
+	lmh.resize(height.size());
+	for (int i = 1; i < height.size() - 1; i++)
+	{
+		lmh[i] = l_max;
+		if (height[i] > l_max)
+			l_max = height[i];
+	}
+	int r_max = height[height.size() - 1];
+	int vol = 0;
+	for (int j = height.size() - 2; j > 0; j--)
+	{
+		int min_h = min(r_max, lmh[j]);
+		if (min_h > height[j])
+			vol = vol + (min_h - height[j]);
+		if (height[j] > r_max)
+			r_max = height[j];
+	}
+
+	return vol;
+}
+
 int main()
 {
 	vector<int> data = {9, 6, 8, 8, 5, 6, 3};
