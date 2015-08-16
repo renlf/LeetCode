@@ -70,13 +70,13 @@ bool isMatch3(string s, string p)
 		if (p[j] == '*')
 		{
 			s_iter = i;
-			p_iter = j++;
+			p_iter = ++j;
 			continue;
 		}
 		if (p_iter != -1)
 		{
 			i = ++s_iter;
-			j = p_iter + 1;
+			j = p_iter;
 			continue;
 		}
 		return false;
