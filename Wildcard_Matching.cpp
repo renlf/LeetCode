@@ -53,6 +53,42 @@ bool isMatch2(const char *s, const char *p) {
 	return dp[s_len][p_len];
 }
 
+bool isMatch3(string s, string p)
+{
+	int i = 0;
+	int j = 0;
+	int p_iter = -1;
+	int s_iter = 0;
+	while (i < s.length())
+	{
+		if (s[i] == p[j] || p[j] == '?')
+		{
+			i++;
+			j++;
+			continue;
+		}
+		if (p[j] == '*')
+		{
+			s_iter = i;
+			p_iter = j++;
+			continue;
+		}
+		if (p_iter != -1)
+		{
+			i = ++s_iter;
+			j = p_iter + 1;
+			continue;
+		}
+		return false;
+	}
+	while (j < p.length() && p[j] == '*')
+		j++;
+	if (j == p.length())
+		return true;
+	else
+		return false;
+}
+
 int main()
 {
 	string s = "bbbaaabaababbabbbaabababbbabababaabbaababbbabbbabb"; 
