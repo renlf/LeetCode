@@ -65,6 +65,44 @@ vector<int> spiralOrder(vector<vector<int>>& matrix) {
 	return ret;
 }
 
+vector<int> spiralOrder2(vector<vector<int>>& matrix)
+{
+	vector<int> ret;
+	if (matrix.size() == 0)
+		return ret;
+	if (matrix.size() == 1)
+		return matrix[0];
+
+	int up = 0;
+	int down = matrix.size() - 1;
+	int left = 0;
+	int right = matrix[0].size() - 1;
+
+	while (up < down && left < right)
+	{
+		for (int i = left; i <= right; i++)
+			ret.push_back(matrix[up][i]);
+		for (int j = ++up; j <= down; j++)
+			ret.push_back(matrix[j][right]);
+		for (int m = --right; m >= left; m--)
+			ret.push_back(matrix[down][m]);
+		for (int n = --down; n >= up; n--)
+			ret.push_back(matrix[n][left]);
+		left++;
+	}
+	if (up == down)
+	{
+		for (int j = left; j <= right; j++)
+			ret.push_back(matrix[up][j]);
+	}
+	else if (left == right)
+	{
+		for (int i = up; i <= down; i++)
+			ret.push_back(matrix[i][left]);
+	}
+	return ret;
+}
+
 int main()
 {
 	vector<vector<int>> matrix;
