@@ -26,6 +26,20 @@ bool canJump(vector<int>& nums) {
 	}
 }
 
+bool canJump2(vector<int>& nums)
+{
+	int max_jmp = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (max_jmp >= nums.size() - 1)
+			return true;
+		if (i > max_jmp)
+			return false;
+		max_jmp = max(max_jmp, i + nums[i]);
+	}
+	return false;
+}
+
 int main()
 {
 	vector<int> nums = { 2, 0, 0 };
