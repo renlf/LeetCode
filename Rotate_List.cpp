@@ -37,6 +37,30 @@ ListNode* rotateRight(ListNode* head, int k) {
 	return new_head;
 }
 
+ListNode* rotateRight2(ListNode* head, int k)
+{
+	if (head == NULL || k == 0)
+		return head;
+	ListNode* former = head;
+	int total_size = 1;
+	while (former->next != NULL)
+	{
+		total_size++;
+		former = former->next;
+	}
+	if (k % total_size == 0)
+		return head;
+	former->next = head;
+	k = total_size - k % total_size;
+	while (k--)
+	{
+		former = former->next;
+	}
+	head = former->next;
+	former->next = NULL;
+	return head;
+}
+
 int main()
 {
 	ListNode *one = new ListNode(1);
