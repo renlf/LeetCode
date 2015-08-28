@@ -14,17 +14,14 @@ bool isNumber(string s) {
 	}
 	if (iter == s.length())
 		return false;
-	int iter_cpy = iter;
 	bool former_num = false;
+	bool backer_num = false;
 	while (iter < s.length() && (s[iter] - '0' >= 0 && s[iter] - '0' <= 9))
 	{
 		iter++;
 		former_num = true;
 	}
-	if (iter == s.length())
-		return true;
 	int de_cpy = iter + 1;
-	bool backer_num = false;
 	if (s[iter] == '.')
 	{
 		iter++;
@@ -35,16 +32,16 @@ bool isNumber(string s) {
 		}
 		if (!former_num && !backer_num)
 			return false;
-
+		former_num = true;
 	}
-	former_num = true;
+
 	backer_num = false;
-	if (iter_cpy != iter && s[iter] == 'e')
+	if (former_num && s[iter] == 'e')
 	{
 		iter++;
 		int op_count = 0;
 		while (iter < s.length() && ((s[iter] - '0' >= 0 && s[iter] - '0' <= 9) || s[iter] == '+' || s[iter] == '-'))
-		{			
+		{
 			if (s[iter] == '+' || s[iter] == '-')
 			{
 				backer_num = false;
