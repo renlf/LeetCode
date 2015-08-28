@@ -64,6 +64,59 @@ bool isNumber(string s) {
 		return false;
 }
 
+bool isNumber2(string s)
+{
+	if (s.length() == 0)
+		return false;
+	int former = 0;
+	int backer = s.length() - 1;
+	while (s[former] == ' ')
+		former++;
+	while (s[backer] == ' ')
+		backer--;
+	if (s[former] == '+' || s[former] == '-')
+		former++;
+	bool is_dot = false;
+	bool is_exp = false;
+	bool is_lft = false;
+	bool is_rht = false;
+	while (former <= backer)
+	{
+		if (s[former] == '.')
+		{
+			if (is_dot || is_rht || is_exp)
+				return false;
+			is_dot = true;
+		}
+		else if (s[former] == 'e')
+		{
+			if (is_exp || !is_lft)
+				return false;
+			is_exp = true;
+		}
+		else if (s[former] == '+' || s[former] == '-')
+		{
+			if (s[former - 1] != 'e')
+				return false;
+		}
+		else if ((s[former] - '0' >= 0) && (s[former] - '0' <= 9))
+		{
+			if (is_exp)
+				is_rht = true;
+			else
+				is_lft = true;
+		}
+		else
+		{
+			return false;
+		}
+		former++;
+	}
+	if (!is_lft || (is_exp && !is_rht))
+		return false;
+	return true;	
+}
+
 int main()
 {
 	string s = ".2e3";
