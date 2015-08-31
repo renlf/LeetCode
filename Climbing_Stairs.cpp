@@ -15,3 +15,17 @@ int climbStairs(int n) {
 	}
 	return dp[n - 1];
 }
+
+int climbStairs2(int n) {
+	if (n <= 2)
+		return n;
+	int former = 1;
+	int backer = 2;
+	for (int i = 2; i < n; i++)
+	{
+		int tmp = backer;
+		backer = backer + former;
+		former = tmp;
+	}
+	return backer;
+}
