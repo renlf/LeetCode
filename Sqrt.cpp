@@ -3,9 +3,7 @@ int mySqrt(int x) {
 	long long right = x;
 	while (left <= right)
 	{
-		long long mid = left / 2 + right / 2;
-		if (left % 2 == 1 && right % 2 == 1)
-			mid++;
+		long long mid = (left + right) / 2;
 		if (mid * mid == x)
 			return mid;
 		else if (mid * mid < x)
@@ -13,10 +11,7 @@ int mySqrt(int x) {
 		else
 			right = mid - 1;
 	}
-	int ret = left / 2 + right / 2;
-	if (left % 2 == 1 && right % 2 == 1)
-		ret++;
-	return ret;
+	return right;
 }
 
 int main()
