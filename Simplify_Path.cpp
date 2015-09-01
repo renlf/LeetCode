@@ -46,6 +46,39 @@ string simplifyPath(string path) {
 	return ret;
 }
 
+string simplifyPath2(string path) {
+	vector<string> st;
+	for (int i = 0; i < path.length();)
+	{
+		if (path[i] == '/')
+		{
+			i++;
+			continue;
+		}
+		int begin = i;
+		while (i < path.length() && path[i] != '/')
+			i++;
+		string tmp = path.substr(begin, i - begin);
+		if (tmp == "..")
+		{
+			if (st.size() > 0)
+				st.pop_back();
+		}
+		else if (tmp != "." && tmp.length() > 0)
+		{
+			st.push_back(tmp);
+		}
+		i++;
+	}
+	if (st.size() == 0)
+		return "/";
+	string ret = "";
+	for (int i = 0; i < st.size(); i++)
+		ret = ret + "/" + st[i];
+	return ret;
+}
+
+
 int main()
 {
 	string ret = simplifyPath("/.headen/");
