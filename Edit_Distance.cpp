@@ -3,12 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-int minThree(int a, int b, int c)
-{
-	int min_tmp = min(a, b);
-	return min(min_tmp, c);
-}
-
 int minDistance(string word1, string word2) {
 	vector<vector<int>> dp;
 	dp.resize(word1.size() + 1, vector<int>(word2.size() + 1));	
@@ -29,7 +23,7 @@ int minDistance(string word1, string word2) {
 				dp[i+1][j+1] = dp[i][j];
 			else
 			{
-				dp[i+1][j+1] = minThree(dp[i][j], dp[i+1][j], dp[i][j+1]) + 1;
+				dp[i+1][j+1] = min(min(dp[i][j], dp[i+1][j]), dp[i][j+1]) + 1;
 			}
 		}
 	}
