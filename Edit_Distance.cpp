@@ -4,6 +4,8 @@
 using namespace std;
 
 int minDistance(string word1, string word2) {
+	if (word1.size() == 0 || word2.size() == 0)
+		return word1.size() + word2.size();
 	vector<vector<int>> dp;
 	dp.resize(word1.size() + 1, vector<int>(word2.size() + 1));	
 	dp[0][0] = 0;
