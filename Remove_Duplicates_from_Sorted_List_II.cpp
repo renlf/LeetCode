@@ -32,5 +32,6 @@ ListNode* deleteDuplicates(ListNode* head) {
 	}
 	if (flag)
 		iter->next = iter_cpy->next;
+	delete dummy;
 	return dummy->next;
 }
