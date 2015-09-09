@@ -7,19 +7,16 @@ struct ListNode {
 };
 
 ListNode* deleteDuplicates(ListNode* head) {
-	if (head == NULL || head->next == NULL)
-		return head;
-	ListNode * iter = head;
+	ListNode * dummy = new ListNode(INT_MIN);
+	dummy->next = head;
+	ListNode * iter = dummy;
 	ListNode * iter_cpy = iter;
 	bool flag = false;
-	bool first = false;
 	while (iter_cpy && iter_cpy->next)
 	{
 		if (iter_cpy->val == (iter_cpy->next)->val)
 		{
 			flag = true;
-			if (iter_cpy == head)
-				first = true;
 		}
 		else
 		{
@@ -35,8 +32,5 @@ ListNode* deleteDuplicates(ListNode* head) {
 	}
 	if (flag)
 		iter->next = iter_cpy->next;
-	if (first)
-		return head->next;
-	else
-		return head;
+	return dummy->next;
 }
