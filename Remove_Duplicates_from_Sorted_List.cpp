@@ -40,12 +40,12 @@ ListNode* deleteDuplicates2(ListNode* head) {
 	{
 		if (iter->val == (iter->next)->val)
 		{
-		    ListNode* tmp = iter->next;
-		    iter->next = tmp->next;
-		    delete tmp;
+			ListNode* tmp = iter->next;
+			iter->next = tmp->next;
+			delete tmp;
 		}
 		else
-		    iter = iter->next;
+			iter = iter->next;
 	}
 	return head;
 }
@@ -56,10 +56,10 @@ ListNode* deleteDuplicates3(ListNode* head) {
 	{
 		if ((*iter)->val == ((*iter)->next)->val)
 		{
-		    *iter = (*iter)->next;
+			*iter = (*iter)->next;
 		}
 		else
-		    iter = &((*iter)->next);
+			iter = &((*iter)->next);
 	}
 	return head;
 }
