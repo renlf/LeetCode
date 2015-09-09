@@ -49,3 +49,17 @@ ListNode* deleteDuplicates2(ListNode* head) {
 	}
 	return head;
 }
+
+ListNode* deleteDuplicates3(ListNode* head) {
+	ListNode** iter = &head;
+	while (*iter && (*iter)->next)
+	{
+		if ((*iter)->val == ((*iter)->next)->val)
+		{
+		    *iter = (*iter)->next;
+		}
+		else
+		    iter = &((*iter)->next);
+	}
+	return head;
+}
