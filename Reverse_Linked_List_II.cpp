@@ -12,23 +12,20 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
 	ListNode* dummy = new ListNode(-1);
 	dummy->next = head;
 	head = dummy;
-	int i = 1;
-	while (i < m)
+	for (int i = 1; i < m; i++)
 	{
 		head = head->next;
-		i++;
 	}
 	ListNode * store = head;
 	head = head->next;
 	ListNode * r_tail = head;
 	ListNode * cur = head->next;
-	while (i < n)
+	for (int i = 0; i < n - m; i++)
 	{
 		ListNode * tmp = cur->next;
 		cur->next = head;
 		head = cur;
 		cur = tmp;
-		i++;
 	}
 	store->next = head;
 	r_tail->next = cur;
