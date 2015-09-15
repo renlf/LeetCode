@@ -32,6 +32,30 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
 	return dummy->next;
 }
 
+ListNode* reverseBetween2(ListNode* head, int m, int n)
+{
+	if (head == NULL || m < 1 || m >= n)
+		return head;
+	ListNode ** phead = &head;
+	for (int i = 1; i < m; i++)
+	{
+		phead = &((*phead)->next);
+	}
+	ListNode * cur = *phead;
+	ListNode * pre = NULL;
+	ListNode * nxt = NULL;
+	for (int i = 0; i <= n - m; i++)
+	{
+		nxt = cur->next;
+		cur->next = pre;
+		pre = cur;
+		cur = nxt;
+	}
+	(*phead)->next = cur;
+	*phead = pre;
+	return head;
+}
+
 int main()
 {
 	ListNode * one = new ListNode(1);
