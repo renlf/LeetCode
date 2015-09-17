@@ -23,10 +23,10 @@ bool bt_isBalanced(TreeNode* root, int & depth)
 		if (abs(l_depth - r_depth) > 1)
 			return false;
 		depth = max(l_depth, r_depth) + 1;
+		return true;
 	}
 	else
 		return false;
-	return true;
 }
 
 bool isBalanced(TreeNode* root) {
