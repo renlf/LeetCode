@@ -33,3 +33,21 @@ void flatten(TreeNode* root) {
 	pre->right = NULL;
 	pre->left = NULL;
 }
+
+void flatten2(TreeNode* root)
+{
+	if (root == NULL || (root->left == NULL && root->right == NULL))
+		return;
+	
+	TreeNode* t_left = root->left;
+	TreeNode* t_right = root->right;
+	flatten2(t_left);
+	flatten2(t_right);
+	root->left = NULL;
+	root->right = t_left;
+	
+	TreeNode* iter = root;
+	while (iter->right != NULL)
+		iter = iter->right;
+	iter->right = t_right;
+}
