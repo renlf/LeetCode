@@ -15,17 +15,15 @@ TreeNode* bt_buildTree(vector<int>& preorder, vector<int>& inorder, int ps, int 
 		return NULL;
 	TreeNode* root = new TreeNode(preorder[ps]);
 	int l_end;
-	int r_start;
 	for (l_end = is; l_end <= ie; l_end++)
 	{
 		if (inorder[l_end] == preorder[ps])
 			break;
 	}
 	int l_num = l_end - is;
-	r_start = l_end + 1;
 
 	root->left = bt_buildTree(preorder, inorder, ps + 1, ps + l_num, is, l_end - 1);
-	root->right = bt_buildTree(preorder, inorder, ps + 1 + l_num, pe, r_start, ie);
+	root->right = bt_buildTree(preorder, inorder, ps + 1 + l_num, pe, l_end + 1, ie);
 	return root;
 }
 
