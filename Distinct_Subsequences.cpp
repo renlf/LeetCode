@@ -27,6 +27,24 @@ int numDistinct(string s, string t) {
 	return dp[s_len][t_len];
 }
 
+int numDistinct2(string s, string t) {
+	if (s.length() < t.length())
+		return 0;
+	int s_len = s.length();
+	int t_len = t.length();
+	vector<int> dp(t_len + 1, 0);
+	dp[0] = 1;
+	for (int i = 1; i <= s_len; i++)
+	{
+		for (int j = t_len; j >= 1; j--)
+		{
+			if (s[i - 1] == t[j - 1])
+				dp[j] += dp[j - 1];
+		}
+	}
+	return dp[t_len];
+}
+
 int main()
 {
 	int ret = numDistinct("rabbbit", "rabbit");
