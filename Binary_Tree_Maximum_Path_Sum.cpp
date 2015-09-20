@@ -10,24 +10,22 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-int bt_maxPathSum(TreeNode* root, vector<int> &data)
+int bt_maxPathSum(TreeNode* root, int &maxp)
 {
 	if (root == NULL)
 		return 0;
-	int l_max = bt_maxPathSum(root->left, data);
-	int r_max = bt_maxPathSum(root->right, data);
+	int l_max = bt_maxPathSum(root->left, maxp);
+	int r_max = bt_maxPathSum(root->right, maxp);
 
-	data.push_back(max(l_max, 0) + max(r_max, 0) + root->val);
-	return max(max(l_max, r_max), 0) + (root->val);
+	maxp = max(maxp, (max(l_max, 0) + max(r_max, 0) + root->val));
+	int ret = max(max(l_max, r_max), 0) + (root->val);
+	maxp = max(maxp, ret);
+	return ret;
 }
 
 int maxPathSum(TreeNode* root) {
-	vector<int> data;
-	int maxp = bt_maxPathSum(root, data);
-	for (int i = 0; i < data.size(); i++)
-	{
-		maxp = max(maxp, data[i]);
-	}
+	int maxp = INT_MIN;
+	bt_maxPathSum(root, maxp);
 	return maxp;
 }
 
