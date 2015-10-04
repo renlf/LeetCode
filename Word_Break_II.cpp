@@ -16,6 +16,7 @@ void bt_wordBreak(vector<string> & ret, vector<string> &sub_ret, vector<vector<b
 		}
 		new_str.pop_back();
 		ret.push_back(new_str);
+		return;
 	}
 	for (int i = 0; i < s.length(); i++)
 	{
