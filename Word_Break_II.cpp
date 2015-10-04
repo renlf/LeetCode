@@ -50,3 +50,41 @@ vector<string> wordBreak(string s, unordered_set<string>& wordDict) {
 	bt_wordBreak(ret, sub_ret, dp, s, s.length());
 	return ret;
 }
+
+void bt_wordBreak2(vector<string> & ret, string sub_ret, vector<vector<int>> dp, string s, int pos)
+{
+	if (pos == 0)
+	{
+		ret.push_back(sub_ret);
+		return;
+	}
+	for (int i = 0; i < dp[pos].size(); i++)
+	{
+		string tmp = s.substr(dp[pos][i], pos - dp[pos][i]);
+		if (pos == s.length())
+			bt_wordBreak2(ret, tmp, dp, s, dp[pos][i]);
+		else
+			bt_wordBreak2(ret, tmp + " " + sub_ret, dp, s, dp[pos][i]);
+	}
+}
+
+vector<string> wordBreak2(string s, unordered_set<string>& wordDict) {
+	vector<bool> sub_dp(s.length() + 1, false);
+	vector<vector<int>> dp(s.length() + 1);
+	sub_dp[0] = true;
+	for (int i = 1; i <= s.length(); i++)
+	{
+		for (int j = i - 1; j >= 0; j--)
+		{
+			if (sub_dp[j] && wordDict.find(s.substr(j, i - j)) != wordDict.end())
+			{
+				sub_dp[i] = true;
+				dp[i].push_back(j);
+			}
+		}
+	}
+	vector<string> ret;
+	string sub_ret;
+	bt_wordBreak2(ret, sub_ret, dp, s, s.length());
+	return ret;
+}
