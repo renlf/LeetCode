@@ -49,3 +49,38 @@ RandomListNode *copyRandomList(RandomListNode *head) {
 	}
 	return ret[head];
 }
+
+RandomListNode *copyRandomList2(RandomListNode *head) {
+	if (head == NULL)
+		return head;
+
+	RandomListNode * cur = head;
+	while (cur != NULL)
+	{
+		RandomListNode * new_node = new RandomListNode(cur->label);
+		new_node->next = cur->next;
+		cur->next = new_node;
+		cur = new_node->next;
+	}
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->random != NULL)
+			cur->next->random = cur->random->next;
+		cur = cur->next->next;
+	}
+	cur = head;
+	RandomListNode* dummy = new RandomListNode(-1);
+	dummy->next = cur->next;
+	while (cur != NULL)
+	{
+		RandomListNode* cpy_node = cur->next;
+		cur->next = cpy_node->next;
+		if (cpy_node->next != NULL)
+		{
+			cpy_node->next = cpy_node->next->next;
+		}
+		cur = cur->next;
+	}
+	return dummy->next;
+}
