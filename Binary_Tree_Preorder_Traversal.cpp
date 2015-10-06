@@ -27,3 +27,37 @@ vector<int> preorderTraversal(TreeNode* root) {
 	}
 	return ret;
 }
+
+//Morris Traveral
+vector<int> preorderTraversal(TreeNode* root)
+{
+	vector<int> ret;
+	TreeNode* cur = root;
+	TreeNode * pre = NULL;
+	while (cur)
+	{
+		if (cur->left == NULL)
+		{
+			ret.push_back(cur->val);
+			cur = cur->right;
+		}
+		else
+		{
+			pre = cur->left;
+			while (pre->right != NULL && pre->right != cur)
+				pre = pre->right;
+			if (pre->right == NULL)
+			{
+				ret.push_back(cur->val);
+				pre->right = cur;
+				cur = cur->left;
+			}
+			else
+			{
+				pre->right = NULL;
+				cur = cur->right;
+			}
+		}
+	}
+	return ret;
+}
