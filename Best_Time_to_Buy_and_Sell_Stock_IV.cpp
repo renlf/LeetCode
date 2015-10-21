@@ -25,11 +25,7 @@ int maxProfit(int k, vector<int>& prices) {
 
 	for (int i = 1; i < prices.size(); i++)
 	{
-		buy[i][0] = max(buy[i - 1][0], -prices[i]);
-	}
-
-	for (int i = 1; i < prices.size(); i++)
-	{
+		buy[i][0] = max(buy[i-1][0], -prices[i]);
 		for (int j = 1; j <= k; j++)
 		{
 			buy[i][j] = max(sell[i - 1][j] - prices[i], buy[i - 1][j]);
