@@ -30,4 +30,11 @@ public:
 		}
 		return dummy->next;
 	}
+	
+	ListNode* removeElements2(ListNode* head, int val) {
+		if (head == NULL)
+			return NULL;
+		head->next = removeElements2(head->next, val);
+		return head->val == val ? head->next : head;
+	}
 };
