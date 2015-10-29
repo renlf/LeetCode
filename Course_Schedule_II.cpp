@@ -41,4 +41,43 @@ public:
 		}
 		return ret;
 	}
+	vector<int> findOrder2(int numCourses, vector<pair<int, int>>& prerequisites)
+	{
+		vector<vector<int>> graph(numCourses);
+		vector<int> visit(numCourses, 0);
+		vector<int> order;
+		for (auto item : prerequisites)
+		{
+			graph[item.second].push_back(item.first);
+		}
+
+		for (int i = 0; i < numCourses; i++)
+		{
+			if (visit[i] == 0 && !dfs(graph, visit, order, i))
+			{
+				order.clear();
+				break;
+			}
+		}
+		reverse(order.begin(), order.end());
+		return order;
+	}
+private:
+	bool dfs(vector<vector<int>> &graph, vector<int> &visit, vector<int> &order, int i)
+	{
+		visit[i] = 1;
+		for (int j = 0; j < graph[i].size(); j++)
+		{
+			int k = graph[i][j];
+			if (visit[k] == 2)
+				continue;
+			if (visit[k] == 1)
+				return false;
+			if (!dfs(graph, visit, order, k))
+				return false;
+		}
+		visit[i] = 2;
+		order.push_back(i);
+		return true;
+	}
 };
